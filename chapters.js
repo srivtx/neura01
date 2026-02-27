@@ -75,7 +75,7 @@ function sandboxHTML(prefix, extraControls = '') {
   </div>`;
 }
 function wireTrainBtn(prefix, sb) {
-  document.getElementById(prefix + '-train').addEventListener('click', () => { sb.isT = !sb.isT; document.getElementById(prefix + '-train').textContent = sb.isT ? '⏸ Pause' : '▶ Train'; });
+  document.getElementById(prefix + '-train').addEventListener('click', () => { sb.isT = !sb.isT; document.getElementById(prefix + '-train').textContent = sb.isT ? 'Pause' : '▶ Train'; });
   document.getElementById(prefix + '-reset').addEventListener('click', () => { sb.isT = false; sb.init(); });
 }
 
@@ -85,16 +85,16 @@ const ChapterContent = {
     number: 'Chapter 1', title: 'The Neuron', subtitle: 'The smallest building block of intelligence — and surprisingly simple.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 Start With an Analogy</div>
+      <div class="content-card"><div class="content-card__title">Start With an Analogy</div>
         <div class="content-card__text">Imagine you're deciding whether to bring an umbrella. You check two things:<br><br>
-        📡 <strong>Signal 1:</strong> How cloudy is it? (let's say 0.8 = very cloudy)<br>
-        📻 <strong>Signal 2:</strong> What did the forecast say? (0.6 = 60% chance of rain)<br><br>
+        <strong>Signal 1:</strong> How cloudy is it? (let's say 0.8 = very cloudy)<br>
+        <strong>Signal 2:</strong> What did the forecast say? (0.6 = 60% chance of rain)<br><br>
         But you trust the forecast <em>more than your eyes</em>. So you give it more <strong>weight</strong>. Maybe cloudiness gets weight 0.3, but the forecast gets weight 0.7.<br><br>
         You multiply each signal by its weight, add them up, and get a single number. That number tells you: bring the umbrella or don't.</div>
-        <div class="callout callout--tip"><strong>💡 That's literally what a neuron does.</strong> It takes inputs, weighs how much each one matters, adds them up, and produces one output.</div>
+        <div class="callout callout--tip"><strong>That's literally what a neuron does.</strong> It takes inputs, weighs how much each one matters, adds them up, and produces one output.</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">🔍 What's Actually Happening — Step by Step</div>
+      <div class="content-card"><div class="content-card__title">What's Actually Happening — Step by Step</div>
         <div class="content-card__text">A neuron has 4 parts. Here's <em>what each does and why it exists</em>:</div>
         <div class="math-block">output = sigmoid( x₁×w₁ + x₂×w₂ + bias )</div>
         <div class="content-card__text">
@@ -104,7 +104,7 @@ const ChapterContent = {
         <strong>Step 4: Activation (sigmoid)</strong> — the weighted sum could be ANY number (-∞ to +∞). Sigmoid squishes it into 0-1, giving us a clean probability. <strong>Why not just use the raw sum?</strong> Because "42.7" isn't a useful answer — we want "87% confident it will rain."</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">⚡ Play With a Live Neuron</div>
+      <div class="content-card"><div class="content-card__title">Play With a Live Neuron</div>
         <div class="content-card__text" style="font-size:.82rem;color:var(--text-secondary);">Drag the sliders to see how each part affects the output. Try: make w₁ negative — what happens? Set bias to 2 — what changes?</div>
         <div class="viz-area" style="min-height:240px;"><div class="neuron-viz" id="n1-viz">
           <div class="neuron-inputs">
@@ -119,7 +119,7 @@ const ChapterContent = {
         </div></div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">💻 Now Let's Write It in Code</div>
+      <div class="content-card"><div class="content-card__title">Now Let's Write It in Code</div>
         <div class="content-card__text" style="font-size:.82rem;color:var(--text-secondary);">Now that you understand each piece, here's how to express it as code. Notice how each line maps to a step above.</div>
         ${cb('sigmoid — the confidence meter', 'step 4', `<span class="cm">// Why sigmoid? It turns any number into a probability (0 to 1)</span>
 <span class="cm">// Input: -∞ to +∞  →  Output: 0 to 1</span>
@@ -157,24 +157,24 @@ const ChapterContent = {
     number: 'Chapter 2', title: 'Wiring a Network', subtitle: 'One neuron is smart. A group of connected neurons is brilliant.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 Why Not Just One Neuron?</div>
+      <div class="content-card"><div class="content-card__title">Why Not Just One Neuron?</div>
         <div class="content-card__text">A single neuron can only draw a <strong>straight line</strong> to separate things. It can tell apart "big vs small" — but it CAN'T solve anything that requires a <em>curved</em> boundary.<br><br>
         Think of it like this: one worker in a factory can only do one simple task. But if you <strong>organize workers into an assembly line</strong>, each doing one step, they can build something complex.<br><br>
         That's what layers do. Each layer transforms the data a little bit, and together they can learn incredibly complex patterns.</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">🔍 The Three Layer Types</div>
+      <div class="content-card"><div class="content-card__title">The Three Layer Types</div>
         <div class="content-card__text">
-        🟢 <strong>Input Layer</strong> — doesn't compute anything. It just passes your raw data in. Think of it as the factory's loading dock — data arrives here.<br><br>
-        🔵 <strong>Hidden Layers</strong> — the "workers." Each neuron here takes ALL outputs from the previous layer (that's why it's called "fully connected"), processes them, and passes its output forward. <strong>Why ALL inputs?</strong> Because each neuron might discover a different useful combination. One might learn "cloudiness + humidity", another might learn "wind speed - temperature."<br><br>
-        🟠 <strong>Output Layer</strong> — the final answer. For yes/no: 1 neuron. For "is it a cat, dog, or bird?": 3 neurons (one per class).<br><br>
+        <strong>Input Layer</strong> — doesn't compute anything. It just passes your raw data in. Think of it as the factory's loading dock — data arrives here.<br><br>
+        <strong>Hidden Layers</strong> — the "workers." Each neuron here takes ALL outputs from the previous layer (that's why it's called "fully connected"), processes them, and passes its output forward. <strong>Why ALL inputs?</strong> Because each neuron might discover a different useful combination. One might learn "cloudiness + humidity", another might learn "wind speed - temperature."<br><br>
+        <strong>Output Layer</strong> — the final answer. For yes/no: 1 neuron. For "is it a cat, dog, or bird?": 3 neurons (one per class).<br><br>
         <strong>Why hidden layers learn different things at different depths:</strong><br>
         • Layer 1: learns simple features (edges, basic patterns)<br>
         • Layer 2: combines those into complex features (shapes, curves)<br>
         • Layer 3: combines THOSE into even higher-level concepts (faces, objects)</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">💻 Code: Building Layers</div>
+      <div class="content-card"><div class="content-card__title">Code: Building Layers</div>
         <div class="content-card__text" style="font-size:.82rem;color:var(--text-secondary);">A Layer is just a group of neurons. A Network is just a stack of layers. The magic is in the connections.</div>
         ${cb('layer — a row of neurons', 'factory workers', `<span class="kw">class</span> <span class="fn">Layer</span> {
   <span class="fn">constructor</span>(numNeurons, inputsPerNeuron) {
@@ -208,7 +208,7 @@ const ChapterContent = {
 }`)}
       </div>
 
-      <div class="content-card"><div class="content-card__title">🔧 Build Your Own Architecture</div>
+      <div class="content-card"><div class="content-card__title">Build Your Own Architecture</div>
         <div class="content-card__text" style="font-size:.82rem;color:var(--text-secondary);">Add layers, change sizes — watch how the network structure changes. More neurons = more connections = more capacity to learn patterns.</div>
         <div id="ch2-layers"></div>
         <button class="btn btn--secondary btn--small" id="ch2-add" style="margin:8px 0;">+ Add Layer</button>
@@ -229,16 +229,16 @@ const ChapterContent = {
     number: 'Chapter 3', title: 'How Networks Learn', subtitle: 'The network starts dumb. Loss, gradients, and backpropagation make it smart.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 The Big Picture</div>
+      <div class="content-card"><div class="content-card__title">The Big Picture</div>
         <div class="content-card__text">Right now, our network has <strong>random weights</strong>. It's like a student who guesses randomly on a test. Learning means:<br><br>
-        1️⃣ <strong>Take the test</strong> (run data through the network)<br>
-        2️⃣ <strong>Grade it</strong> (measure how wrong the answers are)<br>
-        3️⃣ <strong>Review mistakes</strong> (figure out WHICH weights caused the errors)<br>
-        4️⃣ <strong>Study & improve</strong> (adjust those weights slightly)<br><br>
+        1. <strong>Take the test</strong> (run data through the network)<br>
+        2. <strong>Grade it</strong> (measure how wrong the answers are)<br>
+        3. <strong>Review mistakes</strong> (figure out WHICH weights caused the errors)<br>
+        4. <strong>Study &amp; improve</strong> (adjust those weights slightly)<br><br>
         That's it. The entire field of deep learning is just these 4 steps, repeated millions of times.</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">📏 Step 1: Measure the Error (Loss)</div>
+      <div class="content-card"><div class="content-card__title">Step 1: Measure the Error (Loss)</div>
         <div class="content-card__text"><strong>Loss = how wrong is the prediction.</strong> We compare what the network outputs to what the correct answer should be.<br><br>
         <strong>Why square the difference?</strong> Two reasons: (1) It makes all errors positive — a prediction of 0.3 when the answer is 1.0 is just as "wrong" as 1.7. (2) It punishes big mistakes more than small ones — being off by 0.5 is penalized 4× more than being off by 0.25.</div>
         <div class="math-block">Loss = (predicted − actual)²</div>
@@ -260,7 +260,7 @@ const ChapterContent = {
         </div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">⏪ Step 2: Backpropagation (Blame Assignment)</div>
+      <div class="content-card"><div class="content-card__title">Step 2: Backpropagation (Blame Assignment)</div>
         <div class="content-card__text">We know the output is wrong. But the network has <em>hundreds</em> of weights. <strong>Which ones caused the mistake?</strong><br><br>
         Think of a GPS: you took a wrong turn and ended up lost. The GPS doesn't just say "you're wrong" — it traces back through your route to find <em>exactly which turn</em> was the bad one, and tells you how much to correct.<br><br>
         <strong>That's backpropagation.</strong> Starting from the output (where we know the error), we trace backwards through each layer using calculus (the chain rule). Each weight gets a <strong>gradient</strong> — a number that says "this is how much YOU contributed to the error, and which direction to adjust."</div>
@@ -281,7 +281,7 @@ const ChapterContent = {
 <span class="cm">// Why opposite? Because the gradient points toward MORE error</span>
 <span class="cm">// — we want to go the other way, toward LESS error</span>
 weight -= learningRate * gradient * input;`)}
-        <div class="callout callout--tip"><strong>💡 The learning rate</strong> controls how big each adjustment is. Too big = you overshoot the answer and bounce around. Too small = learning takes forever. It's like the GPS saying "turn 90°" vs "turn 5°."</div>
+        <div class="callout callout--tip"><strong>The learning rate</strong> controls how big each adjustment is. Too big = you overshoot the answer and bounce around. Too small = learning takes forever. It's like the GPS saying "turn 90°" vs "turn 5°."</div>
       </div>`;
       document.getElementById('c3s').addEventListener('input', e => { const p = +e.target.value, l = (p - 1) ** 2; document.getElementById('c3p').textContent = p.toFixed(2); document.getElementById('c3l').textContent = l.toFixed(3); document.getElementById('c3l').style.color = l < .01 ? 'var(--accent-green)' : l < .1 ? 'var(--accent-orange)' : 'var(--accent-red)'; });
     }
@@ -291,12 +291,12 @@ weight -= learningRate * gradient * input;`)}
     number: 'Chapter 4', title: 'The Training Recipe', subtitle: 'Forward → Loss → Backward → Update → Repeat. This is the loop that makes AI work.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 Why a Loop?</div>
+      <div class="content-card"><div class="content-card__title">Why a Loop?</div>
         <div class="content-card__text">Think of learning a sport. You don't become good after one try. You <strong>practice</strong> — try a shot, see if it missed, adjust your technique, try again. Over hundreds of repetitions, you get better.<br><br>
         A neural network learns the exact same way. One pass through the data barely changes anything. But <strong>thousands of passes</strong> (called <em>epochs</em>), each making tiny improvements, eventually produce something that works.</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">🔄 The Complete Loop</div>
+      <div class="content-card"><div class="content-card__title">The Complete Loop</div>
         <div class="content-card__text" style="font-size:.82rem;color:var(--text-secondary);">This code ties together everything from Chapters 1-3. Each line maps to a concept you already understand:</div>
         ${cb('the training loop', 'everything together', `<span class="kw">function</span> <span class="fn">train</span>(network, data, lr, epochs) {
   <span class="kw">for</span> (<span class="kw">let</span> e = <span class="num">0</span>; e < epochs; e++) {
@@ -322,12 +322,12 @@ weight -= learningRate * gradient * input;`)}
   }
 }`)}
         <div class="content-card__text"><strong>The three decisions you make before training:</strong><br><br>
-        📊 <strong>Learning rate (lr)</strong> — the step size. Too high? You overshoot and never converge. Too low? Training is painfully slow. Most people start at 0.01-0.5 and adjust.<br><br>
-        🔁 <strong>Epochs</strong> — how many times to loop through all data. More epochs = more learning, but too many = the network memorizes the data instead of learning general patterns (overfitting).<br><br>
-        🔀 <strong>Shuffle</strong> — randomize data order each epoch so the network can't cheat by memorizing sequences.</div>
+        <strong>Learning rate (lr)</strong> — the step size. Too high? You overshoot and never converge. Too low? Training is painfully slow. Most people start at 0.01-0.5 and adjust.<br><br>
+        <strong>Epochs</strong> — how many times to loop through all data. More epochs = more learning, but too many = the network memorizes the data instead of learning general patterns (overfitting).<br><br>
+        <strong>Shuffle</strong> — randomize data order each epoch so the network can't cheat by memorizing sequences.</div>
       </div>
 
-      <div class="content-card"><div class="content-card__title">🚀 Watch It Learn in Real-Time</div>
+      <div class="content-card"><div class="content-card__title">Watch It Learn in Real-Time</div>
         <div class="content-card__text" style="font-size:.82rem;color:var(--text-secondary);">Hit Train and watch all 4 steps happen live. The loss drops, accuracy rises, and the decision boundary forms. Try changing the learning rate mid-training!</div>
         ${sandboxHTML('c4', `<div class="controls-row"><div class="control-group"><div class="control-label"><span>Learning Rate</span><span class="control-label__value" id="c4-lrv">0.50</span></div><input type="range" id="c4-lr" min="0.01" max="2" step="0.01" value="0.5"></div></div>`)}
       </div>`;
@@ -342,17 +342,17 @@ weight -= learningRate * gradient * input;`)}
     number: 'Chapter 5', title: 'The Decision Framework', subtitle: 'I have a problem. What neural network should I build?',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🗺️ Choose Your Architecture</div>
+      <div class="content-card"><div class="content-card__title">Choose Your Architecture</div>
         <div class="content-card__text">Every neural network design starts with <strong>3 questions</strong>:</div>
       </div>
-      <div class="content-card"><div class="content-card__title">❓ Q1: What's your INPUT?</div>
+      <div class="content-card"><div class="content-card__title">Q1: What's your INPUT?</div>
         <div class="content-card__text" style="line-height:2.2;">
-        📊 <strong>Numbers / table data</strong> → Feedforward network (this guide!)<br>
-        🖼️ <strong>Images</strong> → Convolutional Neural Network (CNN)<br>
-        📝 <strong>Text / sequences</strong> → Recurrent Neural Network (RNN) / Transformer<br>
-        🔊 <strong>Audio</strong> → CNN on spectrograms or RNN</div>
+        <strong>Numbers / table data</strong> → Feedforward network (this guide!)<br>
+        <strong>Images</strong> → Convolutional Neural Network (CNN)<br>
+        <strong>Text / sequences</strong> → Recurrent Neural Network (RNN) / Transformer<br>
+        <strong>Audio</strong> → CNN on spectrograms or RNN</div>
       </div>
-      <div class="content-card"><div class="content-card__title">❓ Q2: What's your OUTPUT?</div>
+      <div class="content-card"><div class="content-card__title">Q2: What's your OUTPUT?</div>
         <table style="width:100%;font-size:.85rem;border-collapse:collapse;">
           <tr style="border-bottom:1px solid var(--border-glass);"><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">OUTPUT TYPE</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">EXAMPLE</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">LAST LAYER</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">LOSS FUNCTION</th></tr>
           <tr style="border-bottom:1px solid var(--border-glass);"><td style="padding:10px;">Yes / No</td><td style="padding:10px;color:var(--text-secondary);">Spam detection</td><td style="padding:10px;"><code>1 neuron + sigmoid</code></td><td style="padding:10px;"><code>MSE or BCE</code></td></tr>
@@ -361,7 +361,7 @@ weight -= learningRate * gradient * input;`)}
           <tr><td style="padding:10px;">Multiple numbers</td><td style="padding:10px;color:var(--text-secondary);">RGB color</td><td style="padding:10px;"><code>3 neurons + sigmoid</code></td><td style="padding:10px;"><code>MSE</code></td></tr>
         </table>
       </div>
-      <div class="content-card"><div class="content-card__title">❓ Q3: How DEEP should it be?</div>
+      <div class="content-card"><div class="content-card__title">Q3: How DEEP should it be?</div>
         <table style="width:100%;font-size:.85rem;border-collapse:collapse;">
           <tr style="border-bottom:1px solid var(--border-glass);"><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">PROBLEM</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">HIDDEN LAYERS</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">NEURONS</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">ACTIVATION</th></tr>
           <tr style="border-bottom:1px solid var(--border-glass);"><td style="padding:10px;">Simple (linear)</td><td style="padding:10px;">0-1</td><td style="padding:10px;">4-8</td><td style="padding:10px;">Sigmoid</td></tr>
@@ -369,7 +369,7 @@ weight -= learningRate * gradient * input;`)}
           <tr><td style="padding:10px;">Complex (spirals)</td><td style="padding:10px;">2-4</td><td style="padding:10px;">16-64</td><td style="padding:10px;">ReLU</td></tr>
         </table>
       </div>
-      <div class="content-card"><div class="content-card__title">🔧 Activation Functions Compared</div>
+      <div class="content-card"><div class="content-card__title">Activation Functions Compared</div>
         <table style="width:100%;font-size:.85rem;border-collapse:collapse;">
           <tr style="border-bottom:1px solid var(--border-glass);"><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">FUNCTION</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">RANGE</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">GOOD FOR</th><th style="text-align:left;padding:10px;color:var(--text-dim);font-size:.7rem;">WATCH OUT</th></tr>
           <tr style="border-bottom:1px solid var(--border-glass);"><td style="padding:10px;"><strong>Sigmoid</strong></td><td style="padding:10px;">0 to 1</td><td style="padding:10px;">Output layer (probability)</td><td style="padding:10px;">Vanishing gradients in deep nets</td></tr>
@@ -377,7 +377,7 @@ weight -= learningRate * gradient * input;`)}
           <tr><td style="padding:10px;"><strong>Tanh</strong></td><td style="padding:10px;">-1 to 1</td><td style="padding:10px;">Hidden layers, centered data</td><td style="padding:10px;">Also vanishing gradients</td></tr>
         </table>
       </div>
-      <div class="callout callout--info"><strong>🎯 Rule of thumb:</strong> Start simple. If it doesn't learn, add more layers or neurons. If it overfits, reduce size or add regularization.</div>`;
+      <div class="callout callout--info"><strong>Rule of thumb:</strong> Start simple. If it doesn't learn, add more layers or neurons. If it overfits, reduce size or add regularization.</div>`;
     }
   },
 
@@ -386,7 +386,7 @@ weight -= learningRate * gradient * input;`)}
     number: 'Project 1', title: 'XOR Classifier', subtitle: 'The "Hello World" of neural networks — teach a network to solve XOR.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🎯 The Problem</div>
+      <div class="content-card"><div class="content-card__title">The Problem</div>
         <div class="content-card__text"><strong>XOR</strong> (exclusive or): output 1 when inputs differ, 0 when they're the same.<br>A single neuron CAN'T solve this — you need a hidden layer. This is why neural networks exist!</div>
         <table style="width:200px;font-size:.85rem;border-collapse:collapse;margin:12px 0;">
           <tr style="border-bottom:1px solid var(--border-glass);"><th style="padding:8px;">x₁</th><th style="padding:8px;">x₂</th><th style="padding:8px;">Target</th></tr>
@@ -396,7 +396,7 @@ weight -= learningRate * gradient * input;`)}
           <tr><td style="padding:8px;text-align:center;">1</td><td style="padding:8px;text-align:center;">1</td><td style="padding:8px;text-align:center;color:var(--accent-red);">0</td></tr>
         </table>
       </div>
-      <div class="content-card"><div class="content-card__title">🏗️ Design Decisions</div>
+      <div class="content-card"><div class="content-card__title">Design Decisions</div>
         <div class="content-card__text">
         <strong>Architecture:</strong> [2, 6, 4, 1] — 2 inputs, two hidden layers (6 and 4), 1 output<br>
         <strong>Activation:</strong> Sigmoid (outputs are 0-1 probabilities)<br>
@@ -411,7 +411,7 @@ weight -= learningRate * gradient * input;`)}
 ];
 <span class="fn">train</span>(nn, data, <span class="num">0.5</span>, <span class="num">1000</span>);`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🚀 Train It</div>
+      <div class="content-card"><div class="content-card__title">Train It</div>
         ${sandboxHTML('c6', `<div class="controls-row"><div class="control-group"><div class="control-label"><span>Learning Rate</span><span class="control-label__value" id="c6-lrv">0.50</span></div><input type="range" id="c6-lr" min="0.01" max="2" step="0.01" value="0.5"></div></div>`)}
       </div>`;
       const sb = sandbox('c6'); sb.init();
@@ -424,10 +424,10 @@ weight -= learningRate * gradient * input;`)}
     number: 'Project 2', title: 'Spiral Separator', subtitle: 'A harder problem that shows why DEPTH matters — and why ReLU beats Sigmoid.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🌊 The Problem</div>
+      <div class="content-card"><div class="content-card__title">The Problem</div>
         <div class="content-card__text">Two intertwined spirals — the network must learn a complex, curving decision boundary. This is <strong>impossible</strong> for shallow networks!</div>
       </div>
-      <div class="content-card"><div class="content-card__title">🏗️ Design Decisions</div>
+      <div class="content-card"><div class="content-card__title">Design Decisions</div>
         <div class="content-card__text">
         <strong>Architecture:</strong> [2, 16, 16, 1] — deep and wide for complex patterns<br>
         <strong>Activation:</strong> Tanh or ReLU — sigmoid fails here (vanishing gradients!)<br>
@@ -439,7 +439,7 @@ weight -= learningRate * gradient * input;`)}
   <span class="str">'tanh'</span>  <span class="cm">// tanh works well for centered data</span>
 );`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🚀 Train It</div>
+      <div class="content-card"><div class="content-card__title">Train It</div>
         ${sandboxHTML('c7', `<div class="controls-row">
           <div class="control-group"><div class="control-label"><span>Activation</span></div><select id="c7-act"><option value="tanh">Tanh</option><option value="relu">ReLU</option><option value="sigmoid">Sigmoid (try it!)</option></select></div>
           <div class="control-group"><div class="control-label"><span>Learning Rate</span><span class="control-label__value" id="c7-lrv">0.30</span></div><input type="range" id="c7-lr" min="0.01" max="1" step="0.01" value="0.3"></div></div>`)}
@@ -456,10 +456,10 @@ weight -= learningRate * gradient * input;`)}
     number: 'Project 3', title: 'Digit Reader', subtitle: 'Multi-class classification with softmax — recognize handwritten digits.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">✍️ The Problem</div>
+      <div class="content-card"><div class="content-card__title">The Problem</div>
         <div class="content-card__text">Draw a digit on an 8×8 grid. The network outputs <strong>10 probabilities</strong> (one per digit 0-9). The highest probability is the prediction.</div>
       </div>
-      <div class="content-card"><div class="content-card__title">🏗️ Design Decisions</div>
+      <div class="content-card"><div class="content-card__title">Design Decisions</div>
         <div class="content-card__text">
         <strong>Input:</strong> 64 pixels (8×8 grid, each 0 or 1)<br>
         <strong>Output:</strong> 10 neurons with <strong>softmax</strong> (probabilities that sum to 1)<br>
@@ -481,7 +481,7 @@ weight -= learningRate * gradient * input;`)}
   <span class="kw">return</span> loss;
 }`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🎨 Draw & Recognize</div>
+      <div class="content-card"><div class="content-card__title">Draw & Recognize</div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;">
           <div>
             <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:8px;">DRAW A DIGIT (click cells)</div>
@@ -512,7 +512,7 @@ weight -= learningRate * gradient * input;`)}
       function makeTrainData() { const d = []; for (const [digit, pat] of Object.entries(patterns)) { const t = new Array(10).fill(0); t[+digit] = 1; for (let v = 0; v < 15; v++) { const noisy = pat.map(p => Math.random() < 0.15 ? (1 - p) : p); d.push({ input: noisy, target: t }); } } return d; }
       function predict() { const out = nn8.forward(grid); for (let i = 0; i < 10; i++) { document.getElementById('c8-b' + i).style.width = (out[i] * 100) + '%'; document.getElementById('c8-v' + i).textContent = (out[i] * 100).toFixed(0) + '%'; } }
       document.getElementById('c8-clear').addEventListener('click', () => { grid.fill(0); gridEl.querySelectorAll('div').forEach(d => d.style.background = 'rgba(79,143,255,0.06)'); predict(); });
-      document.getElementById('c8-train').addEventListener('click', () => { const td = makeTrainData(); document.getElementById('c8-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { for (let i = 0; i < 100; i++)nn8.trainEpoch(td, 0.01); predict(); document.getElementById('c8-status').innerHTML = `<strong>✅ Done!</strong> Loss: ${nn8.totalLoss.toFixed(4)} after ${nn8.epoch} epochs. Draw a digit!`; }, 50); });
+      document.getElementById('c8-train').addEventListener('click', () => { const td = makeTrainData(); document.getElementById('c8-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { for (let i = 0; i < 100; i++)nn8.trainEpoch(td, 0.01); predict(); document.getElementById('c8-status').innerHTML = `<strong>Done!</strong> Loss: ${nn8.totalLoss.toFixed(4)} after ${nn8.epoch} epochs. Draw a digit!`; }, 50); });
       predict();
     }
   },
@@ -521,10 +521,10 @@ weight -= learningRate * gradient * input;`)}
     number: 'Project 4', title: 'Curve Fitter', subtitle: 'Regression — teach a network to approximate any function.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">📈 The Problem</div>
+      <div class="content-card"><div class="content-card__title">The Problem</div>
         <div class="content-card__text">Given (x, y) points, train a network to <strong>predict y from x</strong>. Unlike classification, the output is a continuous number — this is <strong>regression</strong>.</div>
       </div>
-      <div class="content-card"><div class="content-card__title">🏗️ Design Decisions</div>
+      <div class="content-card"><div class="content-card__title">Design Decisions</div>
         <div class="content-card__text">
         <strong>Output:</strong> Linear (no activation!) — we need any number, not just 0-1<br>
         <strong>Loss:</strong> MSE — measures distance from the curve<br>
@@ -535,7 +535,7 @@ weight -= learningRate * gradient * input;`)}
   <span class="str">'linear'</span>  <span class="cm">// output: no squishing!</span>
 );`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🚀 Watch It Fit a Curve</div>
+      <div class="content-card"><div class="content-card__title">Watch It Fit a Curve</div>
         <div class="controls-row">
           <div class="control-group"><div class="control-label"><span>Target Function</span></div><select id="c9-fn"><option value="sin">sin(x)</option><option value="quad">x²</option><option value="abs">|x|</option><option value="step">step</option></select></div>
           <div class="control-group"><div class="control-label"><span>Learning Rate</span><span class="control-label__value" id="c9-lrv">0.01</span></div><input type="range" id="c9-lr" min="0.001" max="0.1" step="0.001" value="0.01"></div>
@@ -574,7 +574,7 @@ weight -= learningRate * gradient * input;`)}
       function anim9(t) { if (!document.getElementById('c9-canvas')) return; if (isT9 && nn9) { for (let i = 0; i < 10; i++)nn9.trainEpoch(data9, lr9); upd9(); drawCurve(); } requestAnimationFrame(anim9); }
       document.getElementById('c9-fn').addEventListener('change', e => { fnName = e.target.value; init9(); });
       document.getElementById('c9-lr').addEventListener('input', e => { lr9 = +e.target.value; document.getElementById('c9-lrv').textContent = lr9.toFixed(3); });
-      document.getElementById('c9-train').addEventListener('click', () => { isT9 = !isT9; document.getElementById('c9-train').textContent = isT9 ? '⏸ Pause' : '▶ Train'; });
+      document.getElementById('c9-train').addEventListener('click', () => { isT9 = !isT9; document.getElementById('c9-train').textContent = isT9 ? 'Pause' : '▶ Train'; });
       document.getElementById('c9-reset').addEventListener('click', () => { init9(); });
       init9(); setTimeout(drawCurve, 80); requestAnimationFrame(anim9);
     }
@@ -592,12 +592,12 @@ weight -= learningRate * gradient * input;`)}
         'ode': [2, 2, 3, 4, 4, 3, 2, 1, 0, 0, 1, 2, 2, 1, 1]
       };
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🎵 The Problem</div>
+      <div class="content-card"><div class="content-card__title">The Problem</div>
         <div class="content-card__text">Given a <strong>window of 3 notes</strong>, predict the <strong>next note</strong>. This is called <strong>sequence prediction</strong> — the foundation of language models, music generation, and time series forecasting.</div>
         <div class="content-card__text"><strong>Key insight:</strong> We turn sequences into supervised learning by using sliding windows:<br>
         <code>[C, D, E] → F</code> &nbsp; <code>[D, E, F] → G</code> &nbsp; <code>[E, F, G] → A</code></div>
       </div>
-      <div class="content-card"><div class="content-card__title">🏗️ Design</div>
+      <div class="content-card"><div class="content-card__title">Design</div>
         <div class="content-card__text"><strong>Input:</strong> 3 notes × 7 one-hot = 21 features<br><strong>Output:</strong> 7 neurons + softmax (probability of each note)<br><strong>Architecture:</strong> [21, 16, 7]</div>
         ${cb('sequence prep', 'key concept', `<span class="cm">// Sliding window: turn sequences into training pairs</span>
 <span class="kw">const</span> windowSize = <span class="num">3</span>;
@@ -607,12 +607,12 @@ weight -= learningRate * gradient * input;`)}
   data.<span class="fn">push</span>({ input: <span class="fn">oneHot</span>(input), target: <span class="fn">oneHot</span>(target) });
 }`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🎶 Train & Generate</div>
+      <div class="content-card"><div class="content-card__title">Train & Generate</div>
         <div class="controls-row">
           <div class="control-group"><div class="control-label"><span>Melody</span></div><select id="c10-mel"><option value="scale">Scale</option><option value="twinkle">Twinkle</option><option value="ode">Ode to Joy</option></select></div>
         </div>
         <div style="margin:12px 0;"><div style="font-size:.7rem;color:var(--text-dim);margin-bottom:6px;">MELODY</div><div id="c10-notes" style="display:flex;gap:3px;flex-wrap:wrap;"></div></div>
-        <div class="btn-group"><button class="btn btn--primary" id="c10-train">▶ Train (200 epochs)</button><button class="btn btn--secondary" id="c10-gen">🎵 Generate Next 8</button><button class="btn btn--danger" id="c10-reset">↺ Reset</button></div>
+        <div class="btn-group"><button class="btn btn--primary" id="c10-train">▶ Train (200 epochs)</button><button class="btn btn--secondary" id="c10-gen">Generate Next 8</button><button class="btn btn--danger" id="c10-reset">↺ Reset</button></div>
         <div style="margin:12px 0;"><div style="font-size:.7rem;color:var(--text-dim);margin-bottom:6px;">GENERATED</div><div id="c10-gen-notes" style="display:flex;gap:3px;flex-wrap:wrap;"></div></div>
         <div id="c10-status" class="callout callout--info">Pick a melody and click Train!</div>
         <div style="margin:12px 0;"><div style="font-size:.7rem;color:var(--text-dim);margin-bottom:6px;">NEXT NOTE PROBABILITIES</div><div id="c10-bars"></div></div>
@@ -629,7 +629,7 @@ weight -= learningRate * gradient * input;`)}
       init10();
       document.getElementById('c10-mel').addEventListener('change', e => { melName = e.target.value; init10(); });
       document.getElementById('c10-reset').addEventListener('click', init10);
-      document.getElementById('c10-train').addEventListener('click', () => { const d = makeData(); document.getElementById('c10-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { for (let i = 0; i < 200; i++)nn10.trainEpoch(d, 0.05); const mel = melodies[melName]; const last3 = [...oneHot(mel[mel.length - 3]), ...oneHot(mel[mel.length - 2]), ...oneHot(mel[mel.length - 1])]; const p = nn10.forward(last3); showProbs(p); document.getElementById('c10-status').innerHTML = `<strong>✅ Trained!</strong> Loss: ${nn10.totalLoss.toFixed(4)}. Click Generate!`; }, 50); });
+      document.getElementById('c10-train').addEventListener('click', () => { const d = makeData(); document.getElementById('c10-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { for (let i = 0; i < 200; i++)nn10.trainEpoch(d, 0.05); const mel = melodies[melName]; const last3 = [...oneHot(mel[mel.length - 3]), ...oneHot(mel[mel.length - 2]), ...oneHot(mel[mel.length - 1])]; const p = nn10.forward(last3); showProbs(p); document.getElementById('c10-status').innerHTML = `<strong>Trained!</strong> Loss: ${nn10.totalLoss.toFixed(4)}. Click Generate!`; }, 50); });
       document.getElementById('c10-gen').addEventListener('click', () => { if (!nn10) return; const mel = melodies[melName]; let window3 = [mel[mel.length - 3], mel[mel.length - 2], mel[mel.length - 1]]; const el = document.getElementById('c10-gen-notes'); el.innerHTML = ''; for (let g = 0; g < 8; g++) { const inp = [...oneHot(window3[0]), ...oneHot(window3[1]), ...oneHot(window3[2])]; const p = nn10.forward(inp); showProbs(p); const next = p.indexOf(Math.max(...p)); const d = document.createElement('span'); d.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(245,158,11,0.15);border-radius:6px;font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:#f59e0b;'; d.textContent = notes[next]; el.appendChild(d); window3 = [window3[1], window3[2], next]; } });
     }
   },
@@ -638,10 +638,10 @@ weight -= learningRate * gradient * input;`)}
     number: 'Advanced 2', title: 'Shape Classifier', subtitle: 'Draw shapes on a canvas, train a network to recognize them — real pattern recognition.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🔺 The Problem</div>
+      <div class="content-card"><div class="content-card__title">The Problem</div>
         <div class="content-card__text">Classify <strong>3 types of shapes</strong>: circles, squares, and triangles. The network uses simple geometric features (aspect ratio, fill ratio, corners) to make predictions.</div>
       </div>
-      <div class="content-card"><div class="content-card__title">🏗️ Design</div>
+      <div class="content-card"><div class="content-card__title">Design</div>
         <div class="content-card__text"><strong>Input:</strong> 4 features (roundness, symmetry, pointiness, fill ratio)<br><strong>Output:</strong> 3 neurons + softmax → [circle, square, triangle]<br><strong>Architecture:</strong> [4, 12, 8, 3]</div>
         ${cb('feature engineering', 'key concept', `<span class="cm">// Instead of raw pixels, extract meaningful features</span>
 <span class="cm">// This is how real ML works before deep learning</span>
@@ -652,7 +652,7 @@ features = {
   fillRatio: filledPixels / totalPixels  <span class="cm">// how full is the bounding box</span>
 }`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🎨 Train & Classify</div>
+      <div class="content-card"><div class="content-card__title">Train & Classify</div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
           <div>
             <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:8px;">TRAINING DATA (auto-generated)</div>
@@ -670,7 +670,7 @@ features = {
         </div>
         <div id="c11-status" class="callout callout--info" style="margin-top:12px;">Click Train to teach the network!</div>
       </div>`;
-      const labels = ['🔵 Circle', '🟥 Square', '🔺 Triangle'];
+      const labels = ['Circle', 'Square', 'Triangle'];
       // Build bars
       const bEl = document.getElementById('c11-bars');
       for (let i = 0; i < 3; i++) { const r = document.createElement('div'); r.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:3px;'; r.innerHTML = `<span style="font-size:.75rem;width:80px;color:var(--text-dim);">${labels[i]}</span><div style="flex:1;height:16px;background:rgba(79,143,255,0.06);border-radius:4px;overflow:hidden;"><div id="c11-pb${i}" style="height:100%;background:var(--accent-gradient);border-radius:4px;transition:width .3s;width:33%;"></div></div><span id="c11-pp${i}" style="font-family:var(--font-mono);font-size:.7rem;width:35px;text-align:right;color:var(--text-secondary);">33%</span>`; bEl.appendChild(r); }
@@ -703,7 +703,7 @@ features = {
       init11();
       for (let i = 0; i < 4; i++) { document.getElementById('c11-f' + i).addEventListener('input', e => { document.getElementById('c11-v' + i).textContent = (+e.target.value).toFixed(2); predict11(); }); }
       document.getElementById('c11-reset').addEventListener('click', init11);
-      document.getElementById('c11-train').addEventListener('click', () => { const d = makeData11(); document.getElementById('c11-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { for (let i = 0; i < 300; i++)nn11.trainEpoch(d, 0.02); predict11(); document.getElementById('c11-status').innerHTML = `<strong>✅ Done!</strong> Loss: ${nn11.totalLoss.toFixed(4)}. Try different feature values!`; }, 50); });
+      document.getElementById('c11-train').addEventListener('click', () => { const d = makeData11(); document.getElementById('c11-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { for (let i = 0; i < 300; i++)nn11.trainEpoch(d, 0.02); predict11(); document.getElementById('c11-status').innerHTML = `<strong>Done!</strong> Loss: ${nn11.totalLoss.toFixed(4)}. Try different feature values!`; }, 50); });
     }
   },
 
@@ -711,7 +711,7 @@ features = {
     number: 'Advanced 3', title: 'Auto-Encoder', subtitle: 'Compress data into a tiny representation, then reconstruct it — unsupervised learning!',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🗜️ The Concept</div>
+      <div class="content-card"><div class="content-card__title">The Concept</div>
         <div class="content-card__text">An <strong>auto-encoder</strong> learns to <strong>compress → decompress</strong> data. The network is forced through a "bottleneck" (fewer neurons), so it must learn the most important features.</div>
         <div class="math-block">Input(8) → Encoder(4) → Bottleneck(2) → Decoder(4) → Output(8)</div>
         <div class="content-card__text"><strong>Target = Input!</strong> The network tries to reconstruct its own input. If it can, the bottleneck has learned a useful compressed representation.</div>
@@ -726,7 +726,7 @@ data.<span class="fn">forEach</span>(sample <span class="op">=></span> {
   ae.<span class="fn">backward</span>(sample); <span class="cm">// target = input</span>
 });`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🔬 Try It: Compress & Reconstruct</div>
+      <div class="content-card"><div class="content-card__title">Try It: Compress & Reconstruct</div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;">
           <div>
             <div style="font-size:.7rem;color:var(--text-dim);margin-bottom:8px;">INPUT (click to toggle, 8 values)</div>
@@ -768,7 +768,7 @@ data.<span class="fn">forEach</span>(sample <span class="op">=></span> {
       function init12() { nn12 = new NeuralNetwork([8, 4, 2, 4, 8], 'sigmoid'); renderIO(); }
       init12();
       document.getElementById('c12-reset').addEventListener('click', init12);
-      document.getElementById('c12-train').addEventListener('click', () => { document.getElementById('c12-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { const d = makeData12(); for (let i = 0; i < 500; i++)nn12.trainEpoch(d, 0.5); renderIO(); document.getElementById('c12-loss').textContent = nn12.totalLoss.toFixed(4); document.getElementById('c12-status').innerHTML = `<strong>✅ Trained!</strong> Loss: ${nn12.totalLoss.toFixed(4)}. Toggle input bits to see reconstruction!`; }, 50); });
+      document.getElementById('c12-train').addEventListener('click', () => { document.getElementById('c12-status').innerHTML = '<strong>Training...</strong>'; setTimeout(() => { const d = makeData12(); for (let i = 0; i < 500; i++)nn12.trainEpoch(d, 0.5); renderIO(); document.getElementById('c12-loss').textContent = nn12.totalLoss.toFixed(4); document.getElementById('c12-status').innerHTML = `<strong>Trained!</strong> Loss: ${nn12.totalLoss.toFixed(4)}. Toggle input bits to see reconstruction!`; }, 50); });
     }
   },
 
@@ -776,7 +776,7 @@ data.<span class="fn">forEach</span>(sample <span class="op">=></span> {
     number: 'Advanced 4', title: 'Noise Reducer', subtitle: 'Train a network to clean up corrupted data — denoising in action.',
     render(c) {
       c.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🧹 The Concept</div>
+      <div class="content-card"><div class="content-card__title">The Concept</div>
         <div class="content-card__text">A <strong>denoising network</strong> takes corrupted (noisy) input and learns to output the clean version. This is used in image restoration, audio cleaning, and data preprocessing.</div>
         <div class="math-block">Noisy Input → Network → Clean Output</div>
         <div class="content-card__text"><strong>Key idea:</strong> Train with <code>input = noisy version</code>, <code>target = clean version</code>. The network learns what "clean" looks like.</div>
@@ -791,14 +791,14 @@ data.<span class="fn">forEach</span>(sample <span class="op">=></span> {
 <span class="cm">// Train: noisy → clean</span>
 data.<span class="fn">push</span>({ input: <span class="fn">addNoise</span>(clean, <span class="num">0.3</span>), target: clean });`)}
       </div>
-      <div class="content-card"><div class="content-card__title">🔬 Denoise a Signal</div>
+      <div class="content-card"><div class="content-card__title">Denoise a Signal</div>
         <div style="margin-bottom:12px;"><div class="controls-row"><div class="control-group"><div class="control-label"><span>Noise Level</span><span class="control-label__value" id="c13-nv">0.30</span></div><input type="range" id="c13-noise" min="0.05" max="0.8" step="0.05" value="0.3"></div></div></div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <div style="flex:1;min-width:200px;"><div style="font-size:.7rem;color:var(--text-dim);margin-bottom:6px;">CLEAN SIGNAL</div><canvas id="c13-clean" width="300" height="120" style="width:100%;height:120px;background:rgba(14,14,24,1);border-radius:8px;"></canvas></div>
           <div style="flex:1;min-width:200px;"><div style="font-size:.7rem;color:var(--text-dim);margin-bottom:6px;">NOISY INPUT</div><canvas id="c13-noisy" width="300" height="120" style="width:100%;height:120px;background:rgba(14,14,24,1);border-radius:8px;"></canvas></div>
           <div style="flex:1;min-width:200px;"><div style="font-size:.7rem;color:var(--text-dim);margin-bottom:6px;">DENOISED OUTPUT</div><canvas id="c13-denoised" width="300" height="120" style="width:100%;height:120px;background:rgba(14,14,24,1);border-radius:8px;"></canvas></div>
         </div>
-        <div class="btn-group" style="margin-top:12px;"><button class="btn btn--primary" id="c13-train">▶ Train (300 epochs)</button><button class="btn btn--secondary" id="c13-regen">🔀 New Noise</button><button class="btn btn--danger" id="c13-reset">↺ Reset</button></div>
+        <div class="btn-group" style="margin-top:12px;"><button class="btn btn--primary" id="c13-train">▶ Train (300 epochs)</button><button class="btn btn--secondary" id="c13-regen">New Noise</button><button class="btn btn--danger" id="c13-reset">↺ Reset</button></div>
         <div id="c13-status" class="callout callout--info" style="margin-top:12px;">Click Train to teach noise removal!</div>
         <div class="stats-bar" style="margin-top:8px;">
           <div class="stat"><div class="stat__value" id="c13-loss">—</div><div class="stat__label">Loss</div></div>
@@ -832,7 +832,7 @@ data.<span class="fn">push</span>({ input: <span class="fn">addNoise</span>(clea
           let noiseDist = 0, denoiseDist = 0; for (let i = 0; i < sigLen; i++) { noiseDist += (noisySig[i] - cleanSig[i]) ** 2; denoiseDist += (out[i] - cleanSig[i]) ** 2; }
           const reduction = ((1 - denoiseDist / Math.max(noiseDist, 0.001)) * 100).toFixed(0);
           document.getElementById('c13-loss').textContent = nn13.totalLoss.toFixed(4); document.getElementById('c13-snr').textContent = reduction + '%';
-          document.getElementById('c13-status').innerHTML = `<strong>✅ Trained!</strong> Noise reduced by ${reduction}%. Try different noise levels!`;
+          document.getElementById('c13-status').innerHTML = `<strong>Trained!</strong> Noise reduced by ${reduction}%. Try different noise levels!`;
         }, 50);
       });
     }

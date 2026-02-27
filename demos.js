@@ -17,22 +17,22 @@ const DemoContent = {
         </div>
         <div class="demo-grid">
           <div class="demo-card" data-demo="classification">
-            <div class="demo-card__emoji">🎯</div>
+            <div class="demo-card__icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="8" cy="8" r="4" fill="#a78bfa" opacity="0.7"/><circle cx="20" cy="20" r="4" fill="#67e8f9" opacity="0.7"/><line x1="4" y1="24" x2="24" y2="4" stroke="#5a5b67" stroke-width="1.5" stroke-dasharray="3 3"/></svg></div>
             <div class="demo-card__title">Classification</div>
             <div class="demo-card__desc">Separate data points into two groups. Watch the decision boundary evolve as the network learns which points belong where.</div>
           </div>
           <div class="demo-card" data-demo="regression">
-            <div class="demo-card__emoji">📈</div>
+            <div class="demo-card__icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M3 22 C8 18 14 6 25 4" stroke="#a78bfa" stroke-width="2" fill="none"/><circle cx="6" cy="20" r="2.5" fill="#67e8f9" opacity="0.6"/><circle cx="14" cy="10" r="2.5" fill="#67e8f9" opacity="0.6"/><circle cx="22" cy="6" r="2.5" fill="#67e8f9" opacity="0.6"/></svg></div>
             <div class="demo-card__title">Function Fitting</div>
             <div class="demo-card__desc">Draw data points on a canvas. The network learns to draw a smooth curve through your points — like magic curve-fitting!</div>
           </div>
           <div class="demo-card" data-demo="digits">
-            <div class="demo-card__emoji">✍️</div>
+            <div class="demo-card__icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="3" width="20" height="22" rx="3" stroke="#a78bfa" stroke-width="1.5"/><text x="14" y="20" text-anchor="middle" fill="#67e8f9" font-size="14" font-weight="700" font-family="var(--font-mono)">7</text></svg></div>
             <div class="demo-card__title">Digit Recognition</div>
-            <div class="demo-card__desc">Draw digits on a tiny 8×8 grid. Train the network with your drawings, then test if it can recognize new ones!</div>
+            <div class="demo-card__desc">Draw digits on a tiny 8x8 grid. Train the network with your drawings, then test if it can recognize new ones!</div>
           </div>
           <div class="demo-card" data-demo="colors">
-            <div class="demo-card__emoji">🎨</div>
+            <div class="demo-card__icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="10" r="6" fill="#a78bfa" opacity="0.45"/><circle cx="18" cy="10" r="6" fill="#67e8f9" opacity="0.45"/><circle cx="14" cy="17" r="6" fill="#34d399" opacity="0.45"/></svg></div>
             <div class="demo-card__title">Color Mixer</div>
             <div class="demo-card__desc">Pick target colors and teach the network to produce them. Can it learn to match your palette?</div>
           </div>
@@ -46,7 +46,7 @@ const DemoContent = {
 
   // ===== Classification =====
   classification: {
-    title: '🎯 Classification',
+    title: 'Classification',
     subtitle: 'Train a network to separate data into two classes. The colored background shows what the network "thinks" about every possible point.',
     render(container) {
       container.innerHTML = `
@@ -59,7 +59,7 @@ const DemoContent = {
             </div>
 
             <div class="viz-area" style="height: 320px;">
-              <div class="viz-area__label">Decision Boundary — 🔵 Blue class vs 🟠 Orange class</div>
+              <div class="viz-area__label">Decision Boundary — Blue class vs Orange class</div>
               <canvas id="cls-boundary" style="width: 100%; height: 290px;"></canvas>
             </div>
 
@@ -153,7 +153,7 @@ const DemoContent = {
       document.getElementById('cls-lr').addEventListener('input', e => { lr = parseFloat(e.target.value); document.getElementById('cls-lr-val').textContent = lr.toFixed(2); });
       document.getElementById('cls-train').addEventListener('click', () => {
         isTraining = !isTraining;
-        document.getElementById('cls-train').textContent = isTraining ? '⏸  Pause' : '▶  Train';
+        document.getElementById('cls-train').textContent = isTraining ? 'Pause' : '▶  Train';
       });
       document.getElementById('cls-reset').addEventListener('click', () => { isTraining = false; build(); });
 
@@ -176,7 +176,7 @@ const DemoContent = {
 
   // ===== Function Fitting =====
   regression: {
-    title: '📈 Function Fitting (Regression)',
+    title: 'Function Fitting (Regression)',
     subtitle: 'Draw data points and watch the network learn to fit a smooth curve through them.',
     render(container) {
       container.innerHTML = `
@@ -190,7 +190,7 @@ const DemoContent = {
         <div class="controls-row">
           <div class="control-group">
             <div class="control-label"><span>Preset Data</span></div>
-            <select id="reg-preset"><option value="custom">✏️ Draw Your Own</option><option value="sine">〰️ Sine Wave</option><option value="quadratic">📐 Quadratic</option><option value="step">⬛ Step Function</option></select>
+            <select id="reg-preset"><option value="custom">Draw Your Own</option><option value="sine">Sine Wave</option><option value="quadratic">Quadratic</option><option value="step">Step Function</option></select>
           </div>
           <div class="control-group">
             <div class="control-label"><span>Neurons</span><span class="control-label__value" id="reg-hn-val">8</span></div>
@@ -303,7 +303,7 @@ const DemoContent = {
       document.getElementById('reg-lr').addEventListener('input', e => { lr = parseFloat(e.target.value); document.getElementById('reg-lr-val').textContent = lr.toFixed(3); });
       document.getElementById('reg-train').addEventListener('click', () => {
         isTraining = !isTraining;
-        document.getElementById('reg-train').textContent = isTraining ? '⏸  Pause' : '▶  Train';
+        document.getElementById('reg-train').textContent = isTraining ? 'Pause' : '▶  Train';
       });
       document.getElementById('reg-clear').addEventListener('click', () => { points = []; resizeAndDraw(); });
       document.getElementById('reg-reset').addEventListener('click', () => { buildReg(); resizeAndDraw(); });
@@ -327,7 +327,7 @@ const DemoContent = {
 
   // ===== Digit Recognition =====
   digits: {
-    title: '✍️ Digit Recognition',
+    title: 'Digit Recognition',
     subtitle: 'Draw digits on a tiny grid, train the network with your own handwriting, then test it!',
     render(container) {
       container.innerHTML = `
@@ -349,7 +349,7 @@ const DemoContent = {
           </div>
           <div class="btn-group" style="margin:0; flex-wrap: nowrap;">
             <button class="btn btn--secondary btn--small" id="digit-add">+ Add Sample</button>
-            <button class="btn btn--primary btn--small" id="digit-train">⚡ Train (100 epochs)</button>
+            <button class="btn btn--primary btn--small" id="digit-train">Train (100 epochs)</button>
             <button class="btn btn--secondary btn--small" id="digit-clear">Clear Grid</button>
           </div>
         </div>
@@ -380,7 +380,7 @@ const DemoContent = {
         </div>
 
         <div class="callout callout--tip" style="margin-top: 16px;">
-          <strong>💡 Tip:</strong> Draw simple, centered digits. Add at least 3 examples per digit for best results. The network has 64 inputs (one per pixel), so simple shapes work best!
+          <strong>Tip:</strong> Draw simple, centered digits. Add at least 3 examples per digit for best results. The network has 64 inputs (one per pixel), so simple shapes work best!
         </div>
       `;
 
@@ -466,7 +466,7 @@ const DemoContent = {
 
   // ===== Color Mixer =====
   colors: {
-    title: '🎨 Color Mixer',
+    title: 'Color Mixer',
     subtitle: 'Pick target colors and teach the network to reproduce them from scratch!',
     render(container) {
       container.innerHTML = `
@@ -484,7 +484,7 @@ const DemoContent = {
           </div>
           <div class="btn-group" style="margin: 0;">
             <button class="btn btn--secondary btn--small" id="color-add">+ Add Color</button>
-            <button class="btn btn--primary btn--small" id="color-train">⚡ Train (500 epochs)</button>
+            <button class="btn btn--primary btn--small" id="color-train">Train (500 epochs)</button>
             <button class="btn btn--danger btn--small" id="color-reset">↺ Reset</button>
           </div>
         </div>
@@ -536,7 +536,7 @@ const DemoContent = {
         document.getElementById('color-loss').textContent = nn.totalLoss.toFixed(4);
         renderColors();
         document.getElementById('color-tip').innerHTML = nn.totalLoss < 0.01
-          ? '<strong>🎉 The network learned your colors!</strong> Try adding more.'
+          ? '<strong>The network learned your colors!</strong> Try adding more.'
           : '<strong>Getting closer!</strong> Click Train again for more epochs.';
       });
       document.getElementById('color-reset').addEventListener('click', () => {

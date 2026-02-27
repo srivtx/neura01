@@ -10,7 +10,7 @@ const LabContent = {
         subtitle: 'See gradient descent from above — a ball rolling downhill toward the lowest loss.',
         render(container) {
             container.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 What Am I Looking At?</div>
+      <div class="content-card"><div class="content-card__title">What Am I Looking At?</div>
         <div class="content-card__text">This is the <strong>loss surface</strong> — a 3D landscape where:<br><br>
         • <strong>X and Z axes</strong> = two weights in the network<br>
         • <strong>Y axis (height)</strong> = the loss (error) for those weight values<br>
@@ -150,7 +150,7 @@ const LabContent = {
 
             document.getElementById('lab-loss-run').addEventListener('click', () => {
                 running = !running;
-                document.getElementById('lab-loss-run').textContent = running ? '⏸ Pause' : '▶ Start Descent';
+                document.getElementById('lab-loss-run').textContent = running ? 'Pause' : '▶ Start Descent';
             });
             document.getElementById('lab-loss-reset').addEventListener('click', () => { resetBall(); buildSurface(); updateBall(); });
             document.getElementById('lab-lr').addEventListener('input', e => { lr = +e.target.value; document.getElementById('lab-lr-v').textContent = lr.toFixed(3); });
@@ -164,7 +164,7 @@ const LabContent = {
         subtitle: 'Watch a neural network carve up 3D space to separate data points.',
         render(container) {
             container.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 What Am I Looking At?</div>
+      <div class="content-card"><div class="content-card__title">What Am I Looking At?</div>
         <div class="content-card__text">When your data has 2 features, the decision boundary is a <strong>line</strong>. With 3 features, it becomes a <strong>surface in 3D space</strong>.<br><br>
         The blue and orange dots are two classes. The network learns a surface that separates them. Rotate to see it from different angles!</div>
       </div>
@@ -271,7 +271,7 @@ const LabContent = {
 
             document.getElementById('lab-3d-train').addEventListener('click', () => {
                 running3d = !running3d;
-                document.getElementById('lab-3d-train').textContent = running3d ? '⏸ Pause' : '▶ Train';
+                document.getElementById('lab-3d-train').textContent = running3d ? 'Pause' : '▶ Train';
             });
             document.getElementById('lab-3d-reset').addEventListener('click', () => {
                 running3d = false; epoch3d = 0;
@@ -290,7 +290,7 @@ const LabContent = {
         subtitle: 'See your neural network as a 3D structure with animated data flowing through.',
         render(container) {
             container.innerHTML = `
-      <div class="content-card"><div class="content-card__title">🤔 What Am I Looking At?</div>
+      <div class="content-card"><div class="content-card__title">What Am I Looking At?</div>
         <div class="content-card__text">This is a neural network rendered in 3D. Each sphere is a neuron, each line is a connection (weight).<br><br>
         • <strong>Green neurons</strong> = high activation (this neuron is "firing")<br>
         • <strong>Dark neurons</strong> = low activation (this neuron is quiet)<br>
@@ -303,7 +303,7 @@ const LabContent = {
         <div class="controls-row" style="margin-top:12px;">
           <div class="control-group"><div class="control-label"><span>Architecture</span></div><select id="lab-nn-arch"><option value="simple">[2, 4, 1]</option><option value="medium" selected>[2, 6, 4, 1]</option><option value="deep">[2, 8, 8, 4, 1]</option><option value="wide">[2, 16, 8, 1]</option></select></div>
         </div>
-        <div class="btn-group"><button class="btn btn--primary" id="lab-nn-pulse">⚡ Send Data Through</button><button class="btn btn--danger" id="lab-nn-reset">↺ New Weights</button></div>
+        <div class="btn-group"><button class="btn btn--primary" id="lab-nn-pulse">Send Data Through</button><button class="btn btn--danger" id="lab-nn-reset">↺ New Weights</button></div>
       </div>`;
 
             const el = document.getElementById('lab-3d-network');

@@ -1,11 +1,6 @@
-/* ============================================
-   X-n-net — Premium Design System v2
-   ============================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Refined dark palette — NOT pure black, warm charcoal */
   --bg-primary: #0c0d12;
   --bg-secondary: #111218;
   --bg-glass: rgba(18, 19, 28, 0.75);
@@ -15,7 +10,6 @@
   --border-glass-hover: rgba(255, 255, 255, 0.12);
   --border-active: rgba(168, 139, 250, 0.45);
 
-  /* Warm violet + amber accent system — NOT cold generic blue */
   --accent-primary: #a78bfa;
   --accent-secondary: #818cf8;
   --accent-warm: #f59e0b;
@@ -25,9 +19,7 @@
   --accent-red: #f87171;
   --accent-gradient: linear-gradient(135deg, #a78bfa 0%, #818cf8 50%, #67e8f9 100%);
   --accent-gradient-warm: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  --accent-glow: 0 0 20px rgba(167, 139, 250, 0.2);
 
-  /* Better text hierarchy */
   --text-primary: #f0f0f5;
   --text-secondary: #94959e;
   --text-dim: #5a5b67;
@@ -59,6 +51,7 @@ html {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -69,30 +62,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle radial glow — NOT a grid pattern */
-body::before {
-  content: '';
-  position: fixed;
-  top: -20%;
-  left: -10%;
-  width: 50%;
-  height: 60%;
-  background: radial-gradient(ellipse, rgba(167, 139, 250, 0.04) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
 
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -20%;
-  right: -10%;
-  width: 50%;
-  height: 60%;
-  background: radial-gradient(ellipse, rgba(103, 232, 249, 0.03) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
 
 /* ===== App Layout ===== */
 .app {
@@ -128,7 +98,6 @@ body::after {
 .header__logo {
   width: 32px;
   height: 32px;
-  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.3));
 }
 
 .header__title {
@@ -280,7 +249,6 @@ body::after {
 .sidebar__item--active .sidebar__step {
   background: var(--accent-primary);
   color: #fff;
-  box-shadow: 0 0 10px rgba(167, 139, 250, 0.25);
 }
 
 .sidebar__item-text {
@@ -324,6 +292,8 @@ body::after {
   padding: 36px 48px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  scroll-behavior: smooth;
 }
 
 .main::-webkit-scrollbar {
@@ -379,10 +349,10 @@ body::after {
 }
 
 .chapter__title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.15;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
   margin-bottom: 10px;
   color: var(--text-primary);
 }
@@ -391,7 +361,7 @@ body::after {
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.65;
-  max-width: 580px;
+  max-width: 640px;
   font-weight: 300;
 }
 
@@ -402,41 +372,17 @@ body::after {
   border-radius: var(--radius-lg);
   padding: 26px;
   margin-bottom: 18px;
-  transition: all 0.3s ease;
   box-shadow: var(--shadow-card);
-  position: relative;
-  overflow: hidden;
-}
-
-.content-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.03), transparent);
-  transition: left 0.6s ease;
-  pointer-events: none;
 }
 
 .content-card:hover {
   border-color: var(--border-glass-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.05);
-}
-
-.content-card:hover::before {
-  left: 120%;
 }
 
 .content-card__title {
   font-size: 0.92rem;
   font-weight: 600;
   margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   letter-spacing: -0.01em;
 }
 
@@ -531,6 +477,7 @@ body::after {
 
 input[type="range"] {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   height: 3px;
   border-radius: 3px;
@@ -574,6 +521,11 @@ select {
 
 select:focus {
   border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+}
+
+select:focus-visible {
+  outline: none;
 }
 
 select option {
@@ -596,18 +548,30 @@ select option {
   transition: all var(--transition);
   position: relative;
   letter-spacing: -0.01em;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+  transition-duration: 0.08s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 .btn--primary {
   background: var(--accent-primary);
   color: #fff;
-  box-shadow: 0 2px 12px rgba(167, 139, 250, 0.25);
 }
 
 .btn--primary:hover {
   background: #b89dfc;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(167, 139, 250, 0.35);
+}
+
+.btn--primary:active {
+  transform: scale(0.97);
 }
 
 .btn--secondary {
@@ -648,9 +612,13 @@ select option {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 36px;
-  padding-top: 20px;
+  margin-top: 40px;
+  padding-top: 24px;
   border-top: 1px solid var(--border-glass);
+}
+
+.chapter__footer .btn {
+  padding: 10px 22px;
 }
 
 /* ===== Neuron Visualizer (Chapter 1) ===== */
@@ -749,7 +717,6 @@ select option {
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--accent-primary);
-  text-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
 }
 
 .neuron-output__bar {
@@ -853,7 +820,7 @@ select option {
 .sandbox {
   display: grid;
   grid-template-columns: 1fr 300px;
-  gap: 16px;
+  gap: 20px;
 }
 
 .sandbox__main {
@@ -931,7 +898,7 @@ select option {
 
 .stat__value {
   font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--accent-primary);
 }
@@ -942,6 +909,7 @@ select option {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 500;
+  margin-top: 2px;
 }
 
 /* ===== Explore Demo Cards ===== */
@@ -965,13 +933,21 @@ select option {
 
 .demo-card:hover {
   border-color: rgba(167, 139, 250, 0.25);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(167, 139, 250, 0.1);
 }
 
 .demo-card--active {
   border-color: var(--border-active);
   background: rgba(167, 139, 250, 0.04);
+}
+
+.demo-card__icon {
+  margin-bottom: 14px;
+  opacity: 0.85;
+  transition: opacity var(--transition);
+}
+
+.demo-card:hover .demo-card__icon {
+  opacity: 1;
 }
 
 .demo-card__emoji {

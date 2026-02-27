@@ -83,7 +83,7 @@
         <span style="font-size: 0.78rem; color: var(--text-dim);">${idx + 1} / ${allChapters.length}</span>
         ${nextId
                     ? `<button class="btn btn--primary" id="next-chapter-btn">Next Chapter →</button>`
-                    : `<button class="btn btn--primary" id="goto-explore-btn">🚀 Explore Use Cases →</button>`
+                    : `<button class="btn btn--primary" id="goto-explore-btn">Explore Use Cases →</button>`
                 }
       `;
             chapterEl.appendChild(footer);
